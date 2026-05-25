@@ -1,0 +1,1743 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>DELPHI — AI Market Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#06112b;
+  --muted:#53627a;
+  --line:#e4e9f2;
+  --green:#10b981;
+  --purple:#6d5dfc;
+  --orange:#ff5b2e;
+  --blue:#1686f7;
+  --cyan:#04b6c8;
+  --gold:#d99600;
+  --pink:#ec4080;
+  --shadow:0 22px 68px rgba(15,23,42,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);
+  background:#fff;
+}
+.page{
+  width:min(1510px,95%);
+  margin:0 auto;
+}
+
+/* Header */
+.header{
+  height:88px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:.02em;
+}
+.logo svg{width:41px;height:41px}
+.nav{
+  display:flex;
+  gap:35px;
+  align-items:center;
+  font-size:14px;
+  font-weight:750;
+}
+.nav a{color:#0b1220;text-decoration:none}
+.actions{
+  display:flex;
+  gap:22px;
+  align-items:center;
+  font-size:14px;
+  font-weight:750;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:50px;
+  padding:0 24px;
+  border-radius:12px;
+  border:1px solid transparent;
+  font-weight:850;
+  font-size:15px;
+  text-decoration:none;
+}
+.btn-primary{
+  background:#10b981;
+  color:white;
+  box-shadow:0 16px 34px rgba(16,185,129,.22);
+}
+.btn-secondary{
+  background:white;
+  border-color:#dbe2ed;
+  color:#06112b;
+}
+
+/* Exact-like hero */
+.hero{
+  display:grid;
+  grid-template-columns:585px 1fr;
+  gap:70px;
+  align-items:center;
+  padding:48px 0 35px;
+}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border-radius:999px;
+  background:#ecfdf5;
+  color:#047857;
+  padding:10px 15px;
+  font-size:13px;
+  text-transform:uppercase;
+  font-weight:900;
+  margin-bottom:28px;
+}
+.hero h1{
+  font-size:76px;
+  line-height:.98;
+  letter-spacing:-4.4px;
+  font-weight:950;
+  margin-bottom:28px;
+}
+.hero h1 span{
+  color:var(--green);
+}
+.hero-copy{
+  font-size:18px;
+  color:#53627a;
+  line-height:1.7;
+  max-width:565px;
+  margin-bottom:32px;
+}
+.hero-buttons{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  margin-bottom:25px;
+}
+.live-note{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:#334155;
+  font-size:14px;
+}
+.live-note:before{
+  content:"";
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#10b981;
+}
+
+/* Right cards exactly structured */
+.hero-cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.ai-card{
+  background:white;
+  border:1px solid #e4e9f2;
+  border-radius:14px;
+  padding:28px;
+  box-shadow:var(--shadow);
+}
+.ai-card.big{
+  grid-column:1/3;
+  display:grid;
+  grid-template-columns:340px 1fr;
+  gap:28px;
+  min-height:250px;
+  padding:28px;
+}
+.card-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+.card-label{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  color:#53627a;
+  font-weight:850;
+  font-size:15px;
+}
+.icon{
+  width:38px;
+  height:38px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  background:#eee9ff;
+  color:#6d5dfc;
+  font-size:20px;
+}
+.status{
+  border-radius:999px;
+  background:#ecfdf5;
+  color:#047857;
+  padding:7px 12px;
+  font-weight:850;
+  font-size:13px;
+}
+.status:before{
+  content:"• ";
+}
+.ai-card h3{
+  font-size:28px;
+  line-height:1.12;
+  letter-spacing:-.9px;
+  margin-bottom:15px;
+  font-weight:900;
+}
+.ai-card p{
+  color:#53627a;
+  line-height:1.55;
+  font-size:15.5px;
+}
+.purple{color:#6d5dfc}
+.green{color:#047857}
+.orange{color:#ff5b2e}
+.chart{
+  position:relative;
+  min-height:150px;
+  display:flex;
+  align-items:center;
+}
+.chart svg{
+  width:100%;
+  height:160px;
+  display:block;
+}
+.score-layout{
+  display:grid;
+  grid-template-columns:1fr 145px;
+  gap:20px;
+  align-items:center;
+}
+.scorebox{
+  border:1px solid #e5ebf2;
+  border-radius:14px;
+  padding:18px;
+  background:#fbfcff;
+}
+.scorebox small{
+  display:block;
+  color:#53627a;
+  font-weight:700;
+  margin-bottom:9px;
+}
+.scorebox strong{
+  display:block;
+  color:#059669;
+  font-size:42px;
+  line-height:1;
+}
+.scorebox strong span{
+  color:#334155;
+  font-size:17px;
+  font-weight:500;
+}
+.pill{
+  display:inline-block;
+  margin-top:10px;
+  font-size:11px;
+  font-weight:800;
+  color:#047857;
+  background:#dcfce7;
+  padding:7px 9px;
+  border-radius:999px;
+}
+.progress{
+  margin-top:11px;
+  height:8px;
+  background:#d8f6e9;
+  border-radius:999px;
+  overflow:hidden;
+}
+.progress i{
+  display:block;
+  height:100%;
+  width:92%;
+  background:#10b981;
+  border-radius:999px;
+}
+.bars{
+  height:105px;
+  display:flex;
+  justify-content:flex-end;
+  align-items:flex-end;
+  gap:8px;
+  margin-top:16px;
+}
+.bars i{
+  width:13px;
+  border-radius:8px 8px 0 0;
+  background:linear-gradient(180deg,#ff5b2e,#ffe2d7);
+}
+
+/* Markets exact-like lower block */
+.markets{
+  margin:8px 0 80px;
+  border:1px solid #e4e9f2;
+  border-radius:18px;
+  box-shadow:0 18px 58px rgba(15,23,42,.055);
+  padding:26px 26px 30px;
+}
+.markets-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:24px;
+}
+.markets h2{
+  font-size:27px;
+  letter-spacing:-1px;
+  font-weight:900;
+  margin-bottom:7px;
+}
+.markets p{
+  color:#53627a;
+  font-size:14.5px;
+}
+.market-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:16px;
+}
+.market{
+  min-height:240px;
+  border:1px solid rgba(15,23,42,.06);
+  border-radius:12px;
+  padding:23px 18px 18px;
+  position:relative;
+  overflow:hidden;
+}
+.market.food{background:linear-gradient(135deg,#fff1e7,#fff)}
+.market.marketplace{background:linear-gradient(135deg,#f0e9ff,#fff)}
+.market.retail{background:linear-gradient(135deg,#eaf6ff,#fff)}
+.market.electro{background:linear-gradient(135deg,#e9fbff,#fff)}
+.market.tools{background:linear-gradient(135deg,#fff7dc,#fff)}
+.market.skin{background:linear-gradient(135deg,#fff0f7,#fff)}
+.market-icon{
+  height:70px;
+  font-size:56px;
+  margin-bottom:12px;
+}
+.market h3{
+  font-size:18px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+.market p{
+  font-size:13.7px;
+  line-height:1.45;
+  color:#53627a;
+}
+.market-kpi{
+  position:absolute;
+  left:18px;
+  right:18px;
+  bottom:17px;
+}
+.market-kpi small{
+  display:block;
+  color:#667085;
+  font-size:11.5px;
+  margin-bottom:6px;
+}
+.market-kpi strong{
+  font-size:25px;
+  font-weight:950;
+}
+.market-kpi svg{
+  width:100%;
+  height:34px;
+  margin-top:8px;
+}
+.market-kpi .progress{margin-top:8px}
+.k-orange{color:#ff5b2e}
+.k-purple{color:#6d5dfc}
+.k-blue{color:#1686f7}
+.k-cyan{color:#06b6d4}
+.k-gold{color:#d99600}
+.k-pink{color:#ec4899}
+
+/* Rest of landing */
+.section{
+  padding:82px 0;
+}
+.section-head{
+  text-align:center;
+  max-width:820px;
+  margin:0 auto 46px;
+}
+.section-head h2{
+  font-size:50px;
+  line-height:1.05;
+  letter-spacing:-2.4px;
+  font-weight:950;
+  margin-bottom:15px;
+}
+.section-head p{
+  color:#667085;
+  font-size:18px;
+  line-height:1.65;
+}
+.carousel{
+  display:flex;
+  gap:26px;
+  overflow-x:auto;
+  padding-bottom:14px;
+  scroll-snap-type:x mandatory;
+}
+.carousel::-webkit-scrollbar{height:8px}
+.carousel::-webkit-scrollbar-thumb{background:#d8dee9;border-radius:999px}
+.slide{
+  min-width:1040px;
+  background:white;
+  border:1px solid #e4e9f2;
+  border-radius:28px;
+  padding:30px;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:36px;
+  align-items:center;
+  scroll-snap-align:start;
+}
+.slide-img{
+  width:100%;
+  height:560px;
+  border-radius:22px;
+  border:1px solid #edf2f7;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:white;
+}
+.slide-img img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.slide-tag{
+  color:#047857;
+  font-weight:950;
+  text-transform:uppercase;
+  font-size:12px;
+  letter-spacing:.13em;
+  margin-bottom:12px;
+}
+.slide h3{
+  font-size:48px;
+  line-height:1.05;
+  letter-spacing:-2px;
+  font-weight:950;
+  margin-bottom:15px;
+}
+.slide p{
+  color:#667085;
+  font-size:17px;
+  line-height:1.68;
+  margin-bottom:22px;
+}
+.kpis{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.kpi{
+  background:#f8fafc;
+  border:1px solid #e4e9f2;
+  border-radius:17px;
+  padding:17px;
+}
+.kpi small{
+  display:block;
+  color:#667085;
+  font-weight:850;
+  margin-bottom:8px;
+}
+.kpi strong{
+  font-size:25px;
+}
+
+/* Ask */
+.ask-section{
+  background:#f7f9fc;
+  border-top:1px solid #e4e9f2;
+  border-bottom:1px solid #e4e9f2;
+  padding:90px 0;
+}
+.ask-box{
+  background:#07111c;
+  border-radius:34px;
+  padding:34px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:28px;
+  box-shadow:0 24px 80px rgba(15,23,42,.12);
+}
+.chat{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+.q,.a{
+  padding:20px 23px;
+  border-radius:21px;
+  font-size:16px;
+  line-height:1.6;
+}
+.q{
+  background:#fff;
+  align-self:flex-end;
+  max-width:88%;
+}
+.a{
+  background:linear-gradient(135deg,#10b981,#34d399);
+  color:#fff;
+  font-weight:650;
+  max-width:88%;
+}
+.exec{
+  background:#fff;
+  border-radius:28px;
+  padding:28px;
+}
+.exec h3{
+  font-size:29px;
+  letter-spacing:-1px;
+  margin-bottom:18px;
+}
+.exec-row{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  border-bottom:1px solid #edf1f7;
+  padding:14px 0;
+}
+.exec-row span{color:#475569}
+.exec-row b{text-align:right}
+
+/* CTA */
+.cta{
+  margin:86px auto;
+  padding:68px 30px;
+  text-align:center;
+  background:linear-gradient(135deg,#ecfdf5,#fff);
+  border:1px solid #bbf7d0;
+  border-radius:30px;
+}
+.cta h2{
+  font-size:50px;
+  letter-spacing:-2px;
+  margin-bottom:15px;
+}
+.cta p{
+  color:#667085;
+  font-size:18px;
+  line-height:1.65;
+  max-width:760px;
+  margin:0 auto 28px;
+}
+footer{
+  text-align:center;
+  color:#98a2b3;
+  padding:38px;
+  border-top:1px solid #e4e9f2;
+}
+
+@media(max-width:1180px){
+  .hero{grid-template-columns:1fr;gap:44px}
+  .market-grid{grid-template-columns:repeat(2,1fr)}
+  .slide{min-width:88vw;grid-template-columns:1fr}
+  .ask-box{grid-template-columns:1fr}
+}
+@media(max-width:800px){
+  .nav{display:none}
+  .actions a:first-child{display:none}
+  .hero h1{font-size:52px;letter-spacing:-2.5px}
+  .hero{padding-top:30px}
+  .hero-cards,.ai-card.big,.score-layout,.market-grid,.kpis{grid-template-columns:1fr}
+  .markets-head{display:block}
+  .markets-head .btn{margin-top:18px}
+  .q,.a{max-width:100%}
+  .slide-img{height:360px}
+}
+
+/* Markets refinement v2 */
+.markets{
+  margin:26px 0 90px;
+  border:1px solid #e4e9f2;
+  border-radius:26px;
+  box-shadow:0 24px 76px rgba(15,23,42,.07);
+  padding:34px;
+}
+.markets-head{
+  margin-bottom:30px;
+}
+.markets h2{
+  font-size:34px;
+  letter-spacing:-1.4px;
+}
+.markets p{
+  font-size:16px;
+}
+.market-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+.market{
+  min-height:250px;
+  border-radius:22px;
+  padding:26px;
+  display:grid;
+  grid-template-columns:108px 1fr;
+  gap:22px;
+  align-items:center;
+}
+.market-icon{
+  width:96px;
+  height:96px;
+  border-radius:24px;
+  background:rgba(255,255,255,.72);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:54px;
+  margin:0;
+}
+.market-icon img{
+  max-width:88px;
+  max-height:88px;
+  object-fit:contain;
+  filter:drop-shadow(0 14px 20px rgba(15,23,42,.12));
+}
+.market h3{
+  font-size:25px;
+  letter-spacing:-.8px;
+  margin-bottom:8px;
+}
+.market p{
+  font-size:15.5px;
+  line-height:1.48;
+  min-height:auto;
+}
+.market-kpi{
+  position:static;
+  margin-top:18px;
+}
+.market-kpi small{
+  font-size:12px;
+}
+.market-kpi strong{
+  font-size:29px;
+}
+.market-kpi svg{
+  height:32px;
+}
+@media(max-width:1180px){
+  .market-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:800px){
+  .market-grid{grid-template-columns:1fr}
+  .market{grid-template-columns:90px 1fr}
+  .market-icon{width:82px;height:82px;font-size:46px}
+}
+
+
+/* v3 refinements */
+.page{
+  width:min(1480px,94%);
+  margin-left:auto;
+  margin-right:auto;
+}
+.markets{
+  width:min(1480px,94%);
+  margin-left:auto;
+  margin-right:auto;
+}
+.markets-head{
+  align-items:center;
+}
+.carousel-wrap{
+  position:relative;
+}
+.carousel{
+  scroll-behavior:smooth;
+  padding:0 4px 18px;
+}
+.slide{
+  min-width:100%;
+}
+.carousel-controls{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  margin-top:22px;
+}
+.carousel-btn{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  border:1px solid #d8dee9;
+  background:#fff;
+  color:#07122b;
+  font-size:22px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 12px 30px rgba(15,23,42,.07);
+}
+.carousel-btn:hover{
+  border-color:#10b981;
+  color:#10b981;
+}
+.carousel-dots{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.carousel-dot{
+  width:9px;
+  height:9px;
+  border-radius:999px;
+  border:0;
+  background:#d8dee9;
+  cursor:pointer;
+}
+.carousel-dot.active{
+  width:28px;
+  background:#6d5dfc;
+}
+.slide-img{
+  height:590px;
+}
+.slide-img img{
+  object-fit:contain;
+}
+@media(max-width:1180px){
+  .slide{min-width:100%}
+}
+
+
+/* Final added enterprise sections */
+.extra-insights{
+  padding:84px 0;
+  border-top:1px solid #e4e9f2;
+  background:#fff;
+}
+.extra-insights.alt{
+  background:#f7f9fc;
+}
+.extra-head{
+  text-align:center;
+  max-width:820px;
+  margin:0 auto 44px;
+}
+.extra-eyebrow{
+  color:#047857;
+  text-transform:uppercase;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.14em;
+  margin-bottom:12px;
+}
+.extra-head h2{
+  font-size:44px;
+  line-height:1.05;
+  letter-spacing:-2px;
+  font-weight:950;
+  margin-bottom:14px;
+}
+.extra-head p{
+  color:#667085;
+  font-size:16px;
+  line-height:1.65;
+}
+.tracking-grid,
+.opportunity-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+  max-width:1120px;
+  margin:0 auto;
+}
+.tracking-card{
+  background:#fff;
+  border:1px solid #e4e9f2;
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 18px 54px rgba(15,23,42,.055);
+  position:relative;
+}
+.tracking-card:after{
+  content:"";
+  position:absolute;
+  right:22px;
+  top:22px;
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:#10b981;
+}
+.tracking-card h3{
+  font-size:20px;
+  letter-spacing:-.5px;
+  margin-bottom:18px;
+}
+.info-row{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  border-bottom:1px solid #edf1f7;
+  padding:11px 0;
+  font-size:13px;
+}
+.info-row:last-child{border-bottom:0}
+.info-row span:first-child{
+  font-weight:850;
+  color:#07122b;
+}
+.info-row span:last-child{
+  font-weight:850;
+  color:#475569;
+  text-align:right;
+}
+.workflow-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:16px;
+  max-width:1120px;
+  margin:0 auto;
+}
+.workflow-card{
+  background:#fff;
+  border:1px solid #e4e9f2;
+  border-radius:20px;
+  padding:24px 18px;
+  text-align:center;
+  box-shadow:0 16px 46px rgba(15,23,42,.04);
+}
+.workflow-num{
+  width:34px;
+  height:34px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background:#10b981;
+  color:#fff;
+  font-weight:950;
+  margin:0 auto 14px;
+}
+.workflow-card h3{
+  font-size:15px;
+  font-weight:900;
+  margin-bottom:5px;
+}
+.workflow-card p{
+  color:#07122b;
+  font-size:12px;
+  line-height:1.35;
+}
+@media(max-width:1000px){
+  .tracking-grid,
+  .opportunity-grid{grid-template-columns:1fr}
+  .workflow-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:620px){
+  .workflow-grid{grid-template-columns:1fr}
+  .extra-head h2{font-size:34px}
+}
+
+
+/* Premium polish v5 */
+html{scroll-behavior:smooth}
+body{
+  background:radial-gradient(circle at 82% 7%,rgba(16,185,129,.08),transparent 28%),
+             radial-gradient(circle at 16% 13%,rgba(109,93,252,.055),transparent 24%),#fff;
+}
+.header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  background:rgba(255,255,255,.86);
+  border-bottom:1px solid rgba(228,233,242,.72);
+}
+.logo svg{filter:drop-shadow(0 8px 18px rgba(16,185,129,.16))}
+.nav a,.actions a,.btn{transition:.22s ease}
+.nav a:hover,.actions a:hover{color:#10b981}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary:hover{box-shadow:0 24px 52px rgba(16,185,129,.28)}
+.btn-secondary:hover{border-color:#10b981;box-shadow:0 18px 42px rgba(15,23,42,.07)}
+.hero{min-height:720px}
+.badge{box-shadow:inset 0 0 0 1px rgba(16,185,129,.10)}
+.hero h1{text-wrap:balance}
+.hero h1 span{
+  background:linear-gradient(135deg,#10b981,#13c98b,#059669);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.ai-card,.market,.slide,.tracking-card,.workflow-card,.exec,.cta{
+  transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
+}
+.ai-card:hover,.market:hover,.tracking-card:hover,.workflow-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 34px 90px rgba(15,23,42,.10);
+  border-color:rgba(16,185,129,.22);
+}
+.chart svg path:nth-of-type(2){
+  stroke-dasharray:800;stroke-dashoffset:800;animation:drawLine 1.8s ease forwards .25s;
+}
+@keyframes drawLine{to{stroke-dashoffset:0}}
+.bars i{animation:barRise .9s ease both}
+.bars i:nth-child(1){animation-delay:.05s}.bars i:nth-child(2){animation-delay:.1s}.bars i:nth-child(3){animation-delay:.15s}.bars i:nth-child(4){animation-delay:.2s}.bars i:nth-child(5){animation-delay:.25s}.bars i:nth-child(6){animation-delay:.3s}.bars i:nth-child(7){animation-delay:.35s}.bars i:nth-child(8){animation-delay:.4s}.bars i:nth-child(9){animation-delay:.45s}
+@keyframes barRise{from{height:0;opacity:.2}to{opacity:1}}
+.market{cursor:pointer}
+.market-icon{transition:transform .25s ease}
+.market:hover .market-icon{transform:scale(1.04) rotate(-1deg)}
+.markets{background:rgba(255,255,255,.82);backdrop-filter:blur(14px)}
+.carousel-wrap{max-width:1480px;margin:0 auto}
+.carousel{gap:28px;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:#cfd8e6 transparent}
+.slide{box-shadow:0 24px 72px rgba(15,23,42,.06)}
+.slide:hover{box-shadow:0 36px 100px rgba(15,23,42,.10);border-color:rgba(16,185,129,.20)}
+.slide-img{background:linear-gradient(135deg,#fff,#f8fafc)}
+.slide-img img{transition:transform .35s ease}
+.slide:hover .slide-img img{transform:scale(1.018)}
+.carousel-btn{transition:.22s ease}
+.carousel-btn:hover{transform:translateY(-2px) scale(1.04)}
+.carousel-dot{transition:.22s ease}
+.ask-box{position:relative;overflow:hidden}
+.ask-box:before{
+  content:"";position:absolute;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(16,185,129,.18),transparent 68%);
+  right:-120px;top:-160px;pointer-events:none;
+}
+.chat,.exec{position:relative;z-index:1}
+.q,.a{box-shadow:0 14px 28px rgba(0,0,0,.06)}
+.a:after{
+  content:"";display:inline-block;width:7px;height:1em;margin-left:4px;
+  background:rgba(255,255,255,.9);vertical-align:-2px;animation:blink 1s steps(2,start) infinite;
+}
+@keyframes blink{50%{opacity:0}}
+.extra-insights.alt{
+  background:radial-gradient(circle at 22% 0%,rgba(16,185,129,.08),transparent 24%),#f7f9fc;
+}
+.tracking-card{min-height:160px}
+.tracking-card:after{
+  box-shadow:0 0 0 0 rgba(16,185,129,.65);
+  animation:pulse 2.2s infinite;
+}
+@keyframes pulse{70%{box-shadow:0 0 0 14px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+.workflow-card{min-height:122px}
+.workflow-num{box-shadow:0 12px 24px rgba(16,185,129,.22)}
+.cta{
+  position:relative;overflow:hidden;
+  box-shadow:0 24px 80px rgba(16,185,129,.08);
+}
+.cta:before{
+  content:"";position:absolute;left:-80px;top:-80px;width:240px;height:240px;border-radius:50%;
+  background:radial-gradient(circle,rgba(16,185,129,.17),transparent 70%);
+}
+.cta:after{
+  content:"";position:absolute;right:-80px;bottom:-80px;width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle,rgba(109,93,252,.10),transparent 70%);
+}
+.cta h2,.cta p,.cta .btn{position:relative;z-index:1}
+footer{background:#fbfcfe}
+.footer-grid{
+  width:min(1480px,94%);margin:0 auto;display:flex;justify-content:space-between;
+  align-items:center;gap:24px;color:#667085;font-size:14px;
+}
+.footer-links{display:flex;gap:20px}
+.footer-links a{color:#667085;text-decoration:none;font-weight:700}
+.footer-links a:hover{color:#10b981}
+.reveal{opacity:0;transform:translateY(18px);animation:reveal .75s ease forwards}
+@keyframes reveal{to{opacity:1;transform:none}}
+@media(max-width:800px){
+  body{background:#fff}.header{height:74px}.logo{font-size:22px}.logo svg{width:32px;height:32px}
+  .hero{gap:30px;padding-top:28px;min-height:auto}.hero-cards{gap:14px}.ai-card{padding:22px}
+  .market{min-height:210px}.markets{padding:22px}.slide{padding:20px}
+  .section-head h2,.extra-head h2,.cta h2{font-size:34px;letter-spacing:-1.3px}
+  .footer-grid{flex-direction:column}
+}
+
+
+/* Responsive consistency v6 */
+.hero-cards{
+  align-items:stretch;
+}
+.ai-card{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+}
+.ai-card.big{
+  height:100%;
+}
+.ai-card p{
+  flex:0 0 auto;
+}
+.score-layout{
+  flex:1;
+}
+.markets{
+  overflow:hidden;
+}
+.market-grid{
+  align-items:stretch;
+}
+.market{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+}
+.market-icon{
+  flex:none;
+}
+.market h3{
+  min-height:30px;
+}
+.market p{
+  min-height:44px;
+}
+.market-kpi{
+  margin-top:auto;
+}
+.slide{
+  align-items:stretch;
+}
+.slide > div:last-child{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.slide p{
+  min-height:88px;
+}
+.slide-img{
+  min-height:560px;
+}
+.kpis{
+  margin-top:auto;
+  align-items:stretch;
+}
+.kpi{
+  min-height:104px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.tracking-grid,
+.opportunity-grid,
+.workflow-grid{
+  align-items:stretch;
+}
+.tracking-card,
+.workflow-card{
+  height:100%;
+}
+.info-row{
+  min-height:42px;
+  align-items:center;
+}
+.ask-box{
+  align-items:stretch;
+}
+.chat,
+.exec{
+  height:100%;
+}
+.exec{
+  display:flex;
+  flex-direction:column;
+}
+.exec-row{
+  min-height:50px;
+  align-items:center;
+}
+.cta{
+  max-width:1480px;
+}
+
+/* Better tablet behavior */
+@media(max-width:1180px){
+  .hero-cards{
+    grid-template-columns:1fr 1fr;
+  }
+  .ai-card.big{
+    grid-column:1/3;
+    grid-template-columns:1fr;
+  }
+  .chart{
+    min-height:140px;
+  }
+  .market{
+    min-height:245px;
+  }
+  .slide-img{
+    height:460px;
+    min-height:460px;
+  }
+  .slide p{
+    min-height:auto;
+  }
+}
+
+/* Better mobile behavior */
+@media(max-width:800px){
+  .hero-cards{
+    grid-template-columns:1fr;
+  }
+  .ai-card.big{
+    grid-column:auto;
+  }
+  .score-layout{
+    grid-template-columns:1fr;
+  }
+  .scorebox{
+    max-width:220px;
+  }
+  .market{
+    min-height:220px;
+    display:grid;
+    grid-template-columns:82px 1fr;
+    gap:18px;
+    align-items:center;
+  }
+  .market-icon{
+    grid-row:1 / span 2;
+  }
+  .market h3{
+    min-height:auto;
+  }
+  .market p{
+    min-height:auto;
+  }
+  .market-kpi{
+    grid-column:2;
+    margin-top:10px;
+  }
+  .slide{
+    min-width:92vw;
+  }
+  .slide-img{
+    height:330px;
+    min-height:330px;
+  }
+  .kpi{
+    min-height:86px;
+  }
+  .q,.a{
+    font-size:15px;
+  }
+  .exec-row{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:4px;
+  }
+  .exec-row b{
+    text-align:left;
+  }
+}
+
+@media(max-width:520px){
+  .hero-buttons{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .btn{
+    width:100%;
+  }
+  .markets-head .btn{
+    width:100%;
+  }
+  .market{
+    grid-template-columns:1fr;
+    text-align:left;
+  }
+  .market-icon{
+    grid-row:auto;
+  }
+  .market-kpi{
+    grid-column:auto;
+  }
+  .slide{
+    min-width:94vw;
+    padding:16px;
+  }
+  .slide-img{
+    height:260px;
+    min-height:260px;
+  }
+  .carousel-controls{
+    margin-top:16px;
+  }
+  .carousel-btn{
+    width:42px;
+    height:42px;
+  }
+}
+
+
+/* Integrated strategic sections v7 */
+.why-delphi,.sources,.big-insight{padding:92px 0}
+.why-delphi{background:#fff}
+.sources{background:#f7f9fc;border-top:1px solid #e4e9f2;border-bottom:1px solid #e4e9f2}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px}
+.why-card,.source-card{
+  background:#fff;border:1px solid #e4e9f2;border-radius:24px;padding:28px;
+  box-shadow:0 18px 54px rgba(15,23,42,.05);transition:.28s ease
+}
+.why-card:hover,.source-card:hover{transform:translateY(-4px);border-color:rgba(16,185,129,.24);box-shadow:0 30px 82px rgba(15,23,42,.10)}
+.why-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:18px;background:linear-gradient(135deg,#ecfdf5,#f5f3ff)}
+.why-card h3{font-size:22px;letter-spacing:-.7px;margin-bottom:10px}
+.why-card p,.source-card p{color:#667085;line-height:1.6;font-size:15px}
+.sources-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:38px}
+.source-card{text-align:center}
+.source-card strong{display:block;font-size:18px;margin-top:12px}
+.source-card p{margin-top:6px}
+.insight-shell{background:linear-gradient(135deg,#07111c,#101827);border-radius:34px;padding:46px;color:#fff;position:relative;overflow:hidden;box-shadow:0 34px 100px rgba(15,23,42,.16)}
+.insight-shell:before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,.18),transparent 70%);right:-120px;top:-180px}
+.insight-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:38px;align-items:center}
+.insight-badge{display:inline-flex;border-radius:999px;background:rgba(16,185,129,.14);color:#6ee7b7;padding:9px 14px;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px}
+.insight-shell h2{font-size:54px;line-height:1.02;letter-spacing:-2.5px;margin-bottom:18px}
+.insight-shell p{color:#cbd5e1;font-size:18px;line-height:1.7;max-width:720px}
+.insight-metrics{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.metric-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:22px;backdrop-filter:blur(10px)}
+.metric-card small{display:block;color:#94a3b8;margin-bottom:10px}
+.metric-card strong{font-size:34px;line-height:1}
+.metric-card span{display:block;margin-top:8px;color:#e2e8f0;font-size:14px}
+@media(max-width:1100px){.why-grid{grid-template-columns:repeat(2,1fr)}.sources-grid{grid-template-columns:repeat(2,1fr)}.insight-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.why-grid,.sources-grid,.insight-metrics{grid-template-columns:1fr}.insight-shell{padding:30px}.insight-shell h2{font-size:38px;letter-spacing:-1.6px}}
+
+</style>
+</head>
+
+<body>
+<header class="page header">
+  <div class="logo">
+    <svg viewBox="0 0 48 48" fill="none">
+      <path d="M24 5L43 38H32.5L24 23.2L15.5 38H5L24 5Z" fill="#10A775"/>
+      <path d="M24 28.7L29.4 38H18.6L24 28.7Z" fill="#10A775"/>
+    </svg>
+    DELPHI
+  </div>
+
+  <nav class="nav">
+    <a href="#">Plataforma ⌄</a>
+    <a href="#">Soluciones ⌄</a>
+    <a href="#">Recursos ⌄</a>
+    <a href="#">Pricing</a>
+    <a href="#">Empresa</a>
+  </nav>
+
+  <div class="actions">
+    <a>Iniciar sesión</a>
+    <a class="btn btn-primary">Solicitar demo</a>
+  </div>
+</header>
+
+<main>
+  <section class="page hero reveal">
+    <div>
+      <div class="badge">✣ AI Market Intelligence Platform</div>
+      <h1>Entiende cualquier mercado.<br><span>Gana cada decisión.</span></h1>
+      <p class="hero-copy">DELPHI analiza productos, marketplaces, delivery apps, retail, categorías y competidores usando IA conversacional, señales de mercado en tiempo real y módulos de inteligencia competitiva.</p>
+      <div class="hero-buttons">
+        <a class="btn btn-primary">Start Analyzing →</a>
+        <a class="btn btn-secondary">Watch Demo ◉</a>
+      </div>
+      <div class="live-note">Datos actualizados en tiempo real</div>
+    </div>
+
+    <div class="hero-cards">
+      <div class="ai-card big">
+        <div>
+          <div class="card-title">
+            <div class="card-label"><span class="icon">↗</span> Market Pulse</div>
+            <div class="status">Live</div>
+          </div>
+          <h3>Combo bundles driving <span class="purple">+28%</span> conversion</h3>
+          <p>Delivery apps increasing promo intensity in Mexico City.</p>
+        </div>
+        <div class="chart">
+          <svg viewBox="0 0 520 150" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="lineA" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#6d5dfc"/>
+                <stop offset="100%" stop-color="#10b981"/>
+              </linearGradient>
+              <linearGradient id="areaA" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#6d5dfc" stop-opacity=".25"/>
+                <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0,112 C36,106 54,112 82,92 C112,70 132,74 162,55 C194,36 226,45 252,32 C282,18 305,30 334,26 C365,20 395,44 423,38 C452,32 470,8 493,0 L520,0 L520,150 L0,150 Z" fill="url(#areaA)"/>
+            <path d="M0,112 C36,106 54,112 82,92 C112,70 132,74 162,55 C194,36 226,45 252,32 C282,18 305,30 334,26 C365,20 395,44 423,38 C452,32 470,8 493,0" fill="none" stroke="#6d5dfc" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="493" cy="0" r="8" fill="#6d5dfc" stroke="#fff" stroke-width="4"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="ai-card">
+        <div class="card-label" style="margin-bottom:20px"><span class="icon" style="background:#dcfce7;color:#047857">🧠</span> AI Opportunity</div>
+        <div class="score-layout">
+          <div>
+            <h3>Low competition detected in <span class="green">premium hydration</span></h3>
+            <p>500 ml flavored electrolytes showing accelerated growth.</p>
+          </div>
+          <div class="scorebox">
+            <small>Opportunity Score</small>
+            <strong>92<span>/100</span></strong>
+            <div class="pill">Very High Opportunity</div>
+            <div class="progress"><i></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-card">
+        <div class="card-title">
+          <div class="card-label"><span class="icon" style="background:#fff0e8;color:#ff5b2e">⚡</span> Competitive Pressure</div>
+          <div class="status" style="background:#fff0e8;color:#ff5b2e">High Pressure</div>
+        </div>
+        <h3><span class="orange">Price war detected</span><br>between top sellers</h3>
+        <p>Retail + marketplace channels increasing discount depth.</p>
+        <div class="bars">
+          <i style="height:18%"></i><i style="height:28%"></i><i style="height:36%"></i><i style="height:30%"></i><i style="height:46%"></i><i style="height:40%"></i><i style="height:55%"></i><i style="height:70%"></i><i style="height:83%"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page markets reveal">
+    <div class="markets-head">
+      <div>
+        <h2>Mercados que monitoreamos</h2>
+        <p>Cobertura 360° con inteligencia en tiempo real para que tomes decisiones con ventaja.</p>
+      </div>
+      <a class="btn btn-secondary">Ver todos los mercados →</a>
+    </div>
+
+    <div class="market-grid">
+      <div class="market food">
+        <div class="market-icon">🍔</div>
+        <h3>Food Delivery</h3>
+        <p>Promos, tickets, combos y zonas.</p>
+        <div class="market-kpi">
+          <small>Crecimiento promo 30 días</small>
+          <strong class="k-orange">+18%</strong>
+          <svg viewBox="0 0 140 34"><path d="M2 28 L20 24 L38 27 L54 18 L73 21 L91 12 L110 10 L138 2" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" class="k-orange"/></svg>
+        </div>
+      </div>
+
+      <div class="market marketplace">
+        <div class="market-icon">🛍️</div>
+        <h3>Marketplace</h3>
+        <p>Sellers, rankings y price wars.</p>
+        <div class="market-kpi">
+          <small>Sellers activos</small>
+          <strong class="k-purple">+24%</strong>
+          <svg viewBox="0 0 140 34"><path d="M2 24 L20 20 L38 23 L54 14 L73 17 L91 9 L110 12 L138 3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" class="k-purple"/></svg>
+        </div>
+      </div>
+
+      <div class="market retail">
+        <div class="market-icon">🏪</div>
+        <h3>Retail</h3>
+        <p>Precios, surtido y competencia.</p>
+        <div class="market-kpi">
+          <small>Índice de competitividad</small>
+          <strong class="k-blue">68<span style="font-size:14px">/100</span></strong>
+          <div class="progress"><i style="width:68%;background:#1686f7"></i></div>
+        </div>
+      </div>
+
+      <div class="market electro">
+        <div class="market-icon">💧</div>
+        <h3>Electrolytes</h3>
+        <p>Sabores, formatos y pricing.</p>
+        <div class="market-kpi">
+          <small>Crecimiento categoría 30 días</small>
+          <strong class="k-cyan">+32%</strong>
+          <svg viewBox="0 0 140 34"><path d="M2 30 L20 25 L38 28 L54 18 L73 20 L91 10 L110 13 L138 2" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" class="k-cyan"/></svg>
+        </div>
+      </div>
+
+      <div class="market tools">
+        <div class="market-icon"><img src="assets/drill-product.jpg" alt="Power Tools"></div>
+        <h3>Power Tools</h3>
+        <p>Benchmarks, competitividad y pricing.</p>
+        <div class="market-kpi">
+          <small>Precio promedio</small>
+          <strong class="k-gold">$1,432 <span style="font-size:14px">MXN</span></strong>
+          <svg viewBox="0 0 140 34"><path d="M2 27 L20 24 L38 26 L54 18 L73 22 L91 13 L110 12 L138 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" class="k-gold"/></svg>
+        </div>
+      </div>
+
+      <div class="market skin">
+        <div class="market-icon">🧴</div>
+        <h3>Skin Care</h3>
+        <p>Claims, hidratación y tendencias.</p>
+        <div class="market-kpi">
+          <small>Crecimiento demanda 30 días</small>
+          <strong class="k-pink">+21%</strong>
+          <svg viewBox="0 0 140 34"><path d="M2 29 L20 26 L38 21 L54 24 L73 17 L91 15 L110 9 L138 2" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" class="k-pink"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page section reveal">
+    <div class="section-head">
+      <h2>Interactive Intelligence Modules</h2>
+      <p>Dashboards ejecutivos generados por DELPHI para distintas categorías, mercados e industrias.</p>
+    </div>
+
+    <div class="carousel-wrap">
+    <div class="carousel" id="moduleCarousel">
+      <div class="slide">
+        <div class="slide-img"><img src="assets/delivery.jpg" alt="Food Delivery Intelligence"></div>
+        <div>
+          <div class="slide-tag">Food Delivery Intelligence</div>
+          <h3>Delivery de comida</h3>
+          <p>Análisis competitivo entre DiDi Food, Uber Eats y Rappi con pricing, promociones, ticket promedio y oportunidades detectadas por IA.</p>
+          <div class="kpis">
+            <div class="kpi"><small>Leader</small><strong>DiDi Food</strong></div>
+            <div class="kpi"><small>Promo Intensity</small><strong>+18%</strong></div>
+            <div class="kpi"><small>Average Ticket</small><strong>$362 MXN</strong></div>
+            <div class="kpi"><small>Opportunity</small><strong>92%</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-img"><img src="assets/tools.png" alt="Power Tools Benchmarking"></div>
+        <div>
+          <div class="slide-tag">Power Tools Benchmarking</div>
+          <h3>Taladros inalámbricos 20V</h3>
+          <p>Benchmark competitivo de herramientas eléctricas con marketplaces, pricing y detección automática de oportunidades.</p>
+          <div class="kpis">
+            <div class="kpi"><small>Ideal Pricing</small><strong>USD 99-129</strong></div>
+            <div class="kpi"><small>Opportunity Score</small><strong>92%</strong></div>
+            <div class="kpi"><small>Market Trend</small><strong>-8.7%</strong></div>
+            <div class="kpi"><small>Channel</small><strong>Retail + Marketplace</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-img"><img src="assets/electrolytes.png" alt="Electrolytes Intelligence"></div>
+        <div>
+          <div class="slide-tag">Electrolytes Intelligence</div>
+          <h3>Sueros y electrolitos</h3>
+          <p>Análisis de bebidas funcionales con sabores, formatos, participación de mercado y performance por canal.</p>
+          <div class="kpis">
+            <div class="kpi"><small>Best Format</small><strong>500 ml</strong></div>
+            <div class="kpi"><small>Growth</small><strong>+15%</strong></div>
+            <div class="kpi"><small>Price Range</small><strong>$29-36</strong></div>
+            <div class="kpi"><small>Opportunity Score</small><strong>88%</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-img"><img src="assets/skincare.png" alt="Skin Care Intelligence"></div>
+        <div>
+          <div class="slide-tag">Skin Care Intelligence</div>
+          <h3>Productos de cuidado de la piel</h3>
+          <p>Monitoreo de claims, hidratación, pricing premium, canales y oportunidades en skincare.</p>
+          <div class="kpis">
+            <div class="kpi"><small>Hero Format</small><strong>400 ml</strong></div>
+            <div class="kpi"><small>Premium Range</small><strong>USD 8-12</strong></div>
+            <div class="kpi"><small>Growth</small><strong>+21%</strong></div>
+            <div class="kpi"><small>Opportunity</small><strong>High</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="prevSlide" aria-label="Anterior">‹</button>
+      <div class="carousel-dots" id="carouselDots">
+        <button class="carousel-dot active" aria-label="Slide 1"></button>
+        <button class="carousel-dot" aria-label="Slide 2"></button>
+        <button class="carousel-dot" aria-label="Slide 3"></button>
+        <button class="carousel-dot" aria-label="Slide 4"></button>
+      </div>
+      <button class="carousel-btn" id="nextSlide" aria-label="Siguiente">›</button>
+    </div>
+  </div>
+  </section>
+
+  <section class="ask-section reveal">
+    <div class="page">
+      <div class="section-head">
+        <div class="slide-tag">Pregúntale a DELPHI</div>
+        <h2>Pregúntale cualquier cosa al mercado.</h2>
+        <p>DELPHI funciona como una IA especializada en inteligencia comercial, pricing y competencia.</p>
+      </div>
+
+      <div class="ask-box">
+        <div class="chat">
+          <div class="q">¿Qué rango de precios tiene mayor oportunidad para bebidas isotónicas en México?</div>
+          <div class="a">DELPHI detectó baja presión competitiva entre MXN $29 y $36 en formatos 500 ml. Los sabores frutales muestran +18% mayor crecimiento en marketplace.</div>
+          <div class="q">¿Qué app lidera hamburguesas premium en CDMX?</div>
+          <div class="a">DiDi Food lidera el análisis competitivo, seguido por Uber Eats y Rappi, impulsado por promociones de combos y envíos gratis.</div>
+          <div class="q">¿Cuál es el pricing ideal para lanzar una crema corporal premium?</div>
+          <div class="a">El rango óptimo es USD 8-12 para 400 ml, con foco en claims de hidratación 48h, piel sensible e ingredientes naturales.</div>
+        </div>
+        <div class="exec">
+          <h3>Respuesta ejecutiva</h3>
+          <div class="exec-row"><span>Confidence</span><b>92%</b></div>
+          <div class="exec-row"><span>Opportunity</span><b style="color:#10b981">Alta</b></div>
+          <div class="exec-row"><span>Suggested channel</span><b>Conveniencia + Marketplace</b></div>
+          <div class="exec-row"><span>Recommended action</span><b>Bundle + promo segmentada</b></div>
+          <div class="exec-row"><span>Competitive pressure</span><b>Media</b></div>
+          <div class="exec-row"><span>Expected growth</span><b>+18%</b></div>
+          <div class="exec-row"><span>AI Opportunity Score</span><b>9.2 / 10</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  
+<section class="why-delphi">
+  <div class="page">
+    <div class="section-head">
+      <div class="slide-tag">Why DELPHI</div>
+      <h2>¿Por qué DELPHI es distinto?</h2>
+      <p>No es solo un dashboard. DELPHI interpreta mercados, detecta oportunidades y transforma señales dispersas en decisiones ejecutivas accionables.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon">🧠</div><h3>Conversational AI</h3><p>Pregúntale cualquier cosa al mercado usando lenguaje natural.</p></div>
+      <div class="why-card"><div class="why-icon">📡</div><h3>Real-Time Signals</h3><p>Monitoreo constante de promociones, precios y competencia.</p></div>
+      <div class="why-card"><div class="why-icon">⚔️</div><h3>Competitive Benchmarking</h3><p>Comparación automática entre productos, marcas y canales.</p></div>
+      <div class="why-card"><div class="why-icon">💡</div><h3>AI Opportunities</h3><p>Detección automática de oportunidades con IA.</p></div>
+      <div class="why-card"><div class="why-icon">📈</div><h3>Executive Insights</h3><p>Insights listos para decisiones comerciales y estratégicas.</p></div>
+      <div class="why-card"><div class="why-icon">🌎</div><h3>Multi-Market Intelligence</h3><p>Delivery, retail, marketplaces, skincare, beverages y más.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sources">
+  <div class="page">
+    <div class="section-head">
+      <div class="slide-tag">Data Sources</div>
+      <h2>DELPHI analiza señales desde múltiples fuentes.</h2>
+      <p>La plataforma combina información comercial y competitiva para construir inteligencia de mercado en tiempo real.</p>
+    </div>
+    <div class="sources-grid">
+      <div class="source-card"><div style="font-size:40px">🛒</div><strong>Marketplaces</strong><p>Pricing, rankings y sellers.</p></div>
+      <div class="source-card"><div style="font-size:40px">🍔</div><strong>Delivery Apps</strong><p>Promos, combos y tickets.</p></div>
+      <div class="source-card"><div style="font-size:40px">🏪</div><strong>Retail</strong><p>Surtido, precios y competencia.</p></div>
+      <div class="source-card"><div style="font-size:40px">📦</div><strong>Product Catalogs</strong><p>Features, packs y claims.</p></div>
+      <div class="source-card"><div style="font-size:40px">💸</div><strong>Pricing</strong><p>Elasticidad y price gaps.</p></div>
+      <div class="source-card"><div style="font-size:40px">🏷️</div><strong>Promotions</strong><p>Intensity y competitive pressure.</p></div>
+      <div class="source-card"><div style="font-size:40px">📲</div><strong>Consumer Trends</strong><p>Formatos y tendencias.</p></div>
+      <div class="source-card"><div style="font-size:40px">⚡</div><strong>Competitors</strong><p>Benchmarks y share of visibility.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="big-insight">
+  <div class="page">
+    <div class="insight-shell">
+      <div class="insight-grid">
+        <div>
+          <div class="insight-badge">AI Generated Executive Insight</div>
+          <h2>DELPHI detected a low-competition opportunity for 500 ml flavored electrolytes.</h2>
+          <p>AI analysis identified a high-growth opportunity between MXN $29-$36 in convenience + marketplace channels, driven by rising demand and low promotional pressure.</p>
+        </div>
+        <div class="insight-metrics">
+          <div class="metric-card"><small>Opportunity Score</small><strong>92%</strong><span>Very High Opportunity</span></div>
+          <div class="metric-card"><small>Confidence</small><strong>94%</strong><span>Validated across channels</span></div>
+          <div class="metric-card"><small>Suggested Action</small><strong>4-Pack</strong><span>Launch premium bundle</span></div>
+          <div class="metric-card"><small>Recommended Channel</small><strong>Marketplace</strong><span>+ Convenience Stores</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="extra-insights">
+    <div class="page">
+      <div class="extra-head">
+        <div class="extra-eyebrow">Live Competitive Tracking</div>
+        <h2>Live Competitive Tracking</h2>
+        <p>Alertas, oportunidades y señales competitivas generadas automáticamente por IA.</p>
+      </div>
+
+      <div class="tracking-grid">
+        <div class="tracking-card">
+          <h3>DiDi Food</h3>
+          <div class="info-row"><span>Promo intensity</span><span>+18%</span></div>
+          <div class="info-row"><span>Combo war</span><span>LIVE</span></div>
+          <div class="info-row"><span>Avg ticket</span><span>$362</span></div>
+        </div>
+
+        <div class="tracking-card">
+          <h3>Electrolytes</h3>
+          <div class="info-row"><span>500 ml growth</span><span>+22%</span></div>
+          <div class="info-row"><span>Price gap</span><span>$29-$36</span></div>
+          <div class="info-row"><span>Opportunity</span><span>88%</span></div>
+        </div>
+
+        <div class="tracking-card">
+          <h3>Skin Care</h3>
+          <div class="info-row"><span>Premium claims</span><span>Rising</span></div>
+          <div class="info-row"><span>Body creams</span><span>+14%</span></div>
+          <div class="info-row"><span>Market pressure</span><span>Medium</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="extra-insights alt">
+    <div class="page">
+      <div class="extra-head">
+        <div class="extra-eyebrow">Cómo funciona DELPHI</div>
+        <h2>De pregunta a decisión.</h2>
+        <p>DELPHI convierte inputs simples en inteligencia de mercado accionable.</p>
+      </div>
+
+      <div class="workflow-grid">
+        <div class="workflow-card"><div class="workflow-num">1</div><h3>Ask</h3><p>Pregunta en lenguaje natural.</p></div>
+        <div class="workflow-card"><div class="workflow-num">2</div><h3>Scan</h3><p>Busca señales en canales y categorías.</p></div>
+        <div class="workflow-card"><div class="workflow-num">3</div><h3>Compare</h3><p>Benchmark automático de productos y competidores.</p></div>
+        <div class="workflow-card"><div class="workflow-num">4</div><h3>Interpret</h3><p>Genera insights, riesgos y oportunidades.</p></div>
+        <div class="workflow-card"><div class="workflow-num">5</div><h3>Act</h3><p>Recomienda acciones ejecutivas.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="extra-insights">
+    <div class="page">
+      <div class="extra-head">
+        <div class="extra-eyebrow">AI Generated Opportunities</div>
+        <h2>Oportunidades detectadas automáticamente.</h2>
+        <p>DELPHI no solo muestra datos: interpreta señales y propone acciones concretas para cada industria.</p>
+      </div>
+
+      <div class="opportunity-grid">
+        <div class="tracking-card">
+          <h3>Electrolytes</h3>
+          <div class="info-row"><span>Opportunity</span><span>500 ml</span></div>
+          <div class="info-row"><span>Price Range</span><span>$29-$36</span></div>
+          <div class="info-row"><span>Action</span><span>Launch 4-pack</span></div>
+        </div>
+
+        <div class="tracking-card">
+          <h3>Skin Care</h3>
+          <div class="info-row"><span>Trend</span><span>48h hydration</span></div>
+          <div class="info-row"><span>Premium Range</span><span>USD 8-12</span></div>
+          <div class="info-row"><span>Action</span><span>Natural claims</span></div>
+        </div>
+
+        <div class="tracking-card">
+          <h3>Delivery</h3>
+          <div class="info-row"><span>Leader</span><span>DiDi Food</span></div>
+          <div class="info-row"><span>Promo Intensity</span><span>+18%</span></div>
+          <div class="info-row"><span>Action</span><span>Premium combos</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page cta">
+    <h2>Convierte datos en ventaja competitiva.</h2>
+    <p>DELPHI te ayuda a decidir antes que el mercado, detectando oportunidades, riesgos y tendencias con IA.</p>
+    <a class="btn btn-primary">Solicitar demo →</a>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div><strong>DELPHI</strong> © 2026 — AI Market Intelligence Platform</div>
+    <div class="footer-links">
+      <a href="#">Platform</a>
+      <a href="#">Security</a>
+      <a href="#">Contact</a>
+      <a href="#">Demo</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const carousel = document.getElementById('moduleCarousel');
+  if(!carousel) return;
+  const slides = Array.from(carousel.querySelectorAll('.slide'));
+  const dots = Array.from(document.querySelectorAll('.carousel-dot'));
+  const prev = document.getElementById('prevSlide');
+  const next = document.getElementById('nextSlide');
+  let current = 0;
+
+  function goTo(index){
+    current = (index + slides.length) % slides.length;
+    carousel.scrollTo({ left: slides[current].offsetLeft - carousel.offsetLeft, behavior:'smooth' });
+    dots.forEach((d,i)=>d.classList.toggle('active', i === current));
+  }
+
+  prev && prev.addEventListener('click', ()=>goTo(current - 1));
+  next && next.addEventListener('click', ()=>goTo(current + 1));
+  dots.forEach((dot,i)=>dot.addEventListener('click', ()=>goTo(i)));
+
+  let t;
+  carousel.addEventListener('scroll', ()=>{
+    clearTimeout(t);
+    t = setTimeout(()=>{
+      const idx = slides.reduce((best, slide, i)=>{
+        const dist = Math.abs(slide.offsetLeft - carousel.scrollLeft);
+        return dist < best.dist ? {i, dist} : best;
+      }, {i:0, dist:Infinity}).i;
+      current = idx;
+      dots.forEach((d,i)=>d.classList.toggle('active', i === current));
+    }, 80);
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.documentElement.style.scrollBehavior='auto';
+    return;
+  }
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach((entry)=>{
+      if(entry.isIntersecting){
+        entry.target.style.animationPlayState='running';
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el)=>{
+    el.style.animationPlayState='paused';
+    observer.observe(el);
+  });
+})();
+</script>
+
+</body>
+</html>
